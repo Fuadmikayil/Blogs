@@ -26,7 +26,7 @@ router.post('/addBlog', async (req, res) => {
         if (err) {
             return res.status(401).json({ error: 'Invalid token' });
         }
-        console.log("Z-> Decoded JWT:", decoded);
+        console.log("F-> Decoded JWT:", decoded);
         const userId = decoded.id;
 
         // add blog to db

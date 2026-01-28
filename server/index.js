@@ -28,11 +28,11 @@ app.get('/', (req, res)=>{
 
 mongoose.connect(MONGODB_URI)
     .then(()=>{
-        console.log("Z-> Connected to MongoDB");
+        console.log("F-> Connected to MongoDB");
     }).catch((err)=>{
-        console.error("Z-> Failed to connect to MongoDB", err);
+        console.error("F-> Failed to connect to MongoDB", err);
     });
 
 app.listen(PORT, ()=>{
-    console.log(`Z-> Server is running on http://localhost:${PORT}`);
+    console.log(`F-> Server is running on http://localhost:${PORT}`);
 });
