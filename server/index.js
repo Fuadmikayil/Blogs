@@ -21,7 +21,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/users', userRoutes)
 app.use('/blogs', blogRoutes)
-
+app.get("/test", (req, res)=>{
+    res.json({message: "Test endpoint is working!"});
+});
 app.get('/', (req, res)=>{
     res.json({message: "Hello from Express Server!"});
 });
