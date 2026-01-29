@@ -16,16 +16,24 @@ export default function LoginPage() {
     setError(null)
     setLoading(true)
 
+    // Yoxlama: username və password boş olmasın
+    if (!username || !password) {
+      setError('Please fill in both fields')
+      setLoading(false)
+      return
+    }
+
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_IP}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
+        credentials: 'include', // Cookie-ləri göndəririk
         body: JSON.stringify({ username, password }),
       })
 
+      // Response yoxlanması
       if (!response.ok) {
         const data = await response.json()
         throw new Error(data.message || 'Login failed')

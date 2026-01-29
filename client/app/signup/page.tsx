@@ -26,6 +26,7 @@ export default function SignupPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username, password, name, bio, profilePicture }),
+         credentials: 'include', 
       })
 
       if (!response.ok) {

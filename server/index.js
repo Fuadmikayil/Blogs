@@ -13,8 +13,8 @@ const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 app.use(cors({
-  origin: ['http://localhost:3001', 'https://blog-rho-eight-34.vercel.app'],
-  credentials: true
+  origin: ['http://localhost:3000', 'https://Demolink.vercel.app'],
+  credentials: true,
 }));
 
 app.use(express.json());

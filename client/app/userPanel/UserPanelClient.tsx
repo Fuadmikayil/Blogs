@@ -46,10 +46,10 @@ export default function UserPanelClient() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-indigo-700">
       <main className="max-w-6xl mx-auto px-6 py-12">
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Add New Blog</h1>
+        <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-xl">
+          <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Add New Blog</h1>
 
           {error && (
             <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
@@ -67,8 +67,8 @@ export default function UserPanelClient() {
             <input
               value={title}
               onChange={e => setTitle(e.target.value)}
-              placeholder="Title"
-              className="w-full px-4 py-2 border rounded-lg text-gray-900 placeholder-gray-400"
+              placeholder="Blog Title"
+              className="w-full px-4 py-2 border rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 transition-all"
               required
             />
 
@@ -77,7 +77,7 @@ export default function UserPanelClient() {
               onChange={e => setContent(e.target.value)}
               placeholder="Content"
               rows={6}
-              className="w-full px-4 py-2 border rounded-lg text-gray-900 placeholder-gray-400"
+              className="w-full px-4 py-2 border rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 transition-all"
               required
             />
 
@@ -85,13 +85,13 @@ export default function UserPanelClient() {
               value={img}
               onChange={e => setImg(e.target.value)}
               placeholder="Image URL"
-              className="w-full px-4 py-2 border rounded-lg text-gray-900 placeholder-gray-400"
+              className="w-full px-4 py-2 border rounded-lg text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 transition-all"
               required
             />
 
             <button
               disabled={loading}
-              className="w-full px-6 py-2 bg-gray-900 text-white rounded-lg"
+              className="w-full px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all disabled:opacity-50"
             >
               {loading ? 'Publishing…' : 'Publish Blog'}
             </button>

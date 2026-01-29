@@ -37,46 +37,46 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-6 py-12">
+    <div className="min-h-screen bg-gradient-to-r from-indigo-700 to-purple-800">
+      <main className="max-w-7xl mx-auto px-6 py-12">
         {loading && (
           <div className="text-center py-16">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-            <p className="mt-4 text-gray-600">Loading blogs...</p>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            <p className="mt-4 text-white text-lg font-semibold">Loading blogs...</p>
           </div>
         )}
 
         {error && (
           <div className="text-center py-16 bg-red-50 rounded-lg p-6">
-            <p className="text-red-700">Error: {error}</p>
+            <p className="text-red-700 font-semibold">{error}</p>
           </div>
         )}
 
         {!loading && !error && blogs.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-gray-600 text-lg">No blogs yet. Check back soon!</p>
+            <p className="text-white text-lg font-medium">No blogs yet. Check back soon!</p>
           </div>
         )}
 
         {!loading && !error && blogs.length > 0 && (
-          <div className="grid gap-8 grid-cols-3">
+          <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {blogs.map((blog) => (
-              <article key={blog._id} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+              <article key={blog._id} className="group border-2 border-transparent rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 bg-white transform hover:scale-105 hover:shadow-lg">
                 {/* Blog Image */}
-                <div className="relative h-64 w-full bg-gray-100">
+                <div className="relative h-84 w-full bg-gray-100">
                   <Image
                     src={blog.img}
                     alt={blog.title}
-                    fill
-                    className="object-cover"
+                    layout="fill"
+                    objectFit="cover"
+                    className="group-hover:scale-110 transition-all duration-500"
                   />
                 </div>
 
                 {/* Blog Content */}
                 <div className="p-6">
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-3">{blog.title}</h2>
-                  <p className="text-gray-600 mb-6 line-clamp-2">{blog.content}</p>
+                  <h2 className="text-3xl font-semibold text-gray-900 mb-3">{blog.title}</h2>
+                  <p className="text-gray-600 mb-6 line-clamp-3">{blog.content}</p>
 
                   {/* Author Section */}
                   <div className="flex items-center justify-between">
@@ -85,16 +85,18 @@ export default function HomePage() {
                         src={blog.authorProfilePicture}
                         alt={blog.authorName}
                         width={40}
-                        height={40}
-                        className="w-10 h-10 rounded-full"
+                        height={50}
+                        className="w-12 h-12 rounded-full border-2 border-indigo-500 transition-all duration-300 group-hover:border-indigo-700"
                       />
                       <div>
                         <p className="text-sm font-medium text-gray-900">{blog.authorName}</p>
                         <p className="text-xs text-gray-500">{new Date(blog.createdAt).toLocaleDateString()}</p>
                       </div>
                     </div>
-                    <Link href={`/blog/${blog._id}`} className="text-sm font-medium text-gray-900 hover:text-gray-600">
-                      Read →
+                    <Link href={`/blog/${blog._id}`} passHref>
+                      <button className="text-sm cursor-pointer font-medium text-indigo-600 hover:text-indigo-800 transition-all duration-200">
+                        Read more
+                      </button>
                     </Link>
                   </div>
                 </div>
