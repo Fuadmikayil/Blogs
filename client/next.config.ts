@@ -13,11 +13,12 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api2/:path*',
-        destination: 'http://45.94.209.96/api2/:path*',
-      },
-    ];
+        source: '/api/:path*',       // frontend-də çağırdığın URL prefix
+        destination: 'http://161.97.168.167/:path*' // backend IP + path
+      }
+    ]
   },
-};
+}
+
 
 export default nextConfig;
