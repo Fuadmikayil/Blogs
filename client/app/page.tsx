@@ -1,40 +1,40 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 interface Blog {
-  _id: string
-  title: string
-  content: string
-  img: string
-  authorName: string
-  authorProfilePicture: string
-  createdAt: string
+  _id: string;
+  title: string;
+  content: string;
+  img: string;
+  authorName: string;
+  authorProfilePicture: string;
+  createdAt: string;
 }
 
 export default function HomePage() {
-  const [blogs, setBlogs] = useState<Blog[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_IP}/blogs/getBlogs`)
-        if (!response.ok) throw new Error('Failed to fetch blogs')
-        const data = await response.json()
-        setBlogs(data)
+        const response = await fetch("/api/blogs/getBlogs"); // frontend prefix
+        if (!response.ok) throw new Error("Failed to fetch blogs");
+        const data = await response.json();
+        setBlogs(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
+        setError(err instanceof Error ? err.message : "An error occurred");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchBlogs()
-  }, [])
+    fetchBlogs();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-700 to-purple-800">
@@ -42,7 +42,9 @@ export default function HomePage() {
         {loading && (
           <div className="text-center py-16">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-            <p className="mt-4 text-white text-lg font-semibold">Loading blogs...</p>
+            <p className="mt-4 text-white text-lg font-semibold">
+              Loading blogs...
+            </p>
           </div>
         )}
 
@@ -54,14 +56,19 @@ export default function HomePage() {
 
         {!loading && !error && blogs.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-white text-lg font-medium">No blogs yet. Check back soon!</p>
+            <p className="text-white text-lg font-medium">
+              No blogs yet. Check back soon!
+            </p>
           </div>
         )}
 
         {!loading && !error && blogs.length > 0 && (
           <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {blogs.map((blog) => (
-              <article key={blog._id} className="group border-2 border-transparent rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 bg-white transform hover:scale-105 hover:shadow-lg">
+              <article
+                key={blog._id}
+                className="group border-2 border-transparent rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 bg-white transform hover:scale-105 hover:shadow-lg"
+              >
                 {/* Blog Image */}
                 <div className="relative h-84 w-full bg-gray-100">
                   <Image
@@ -75,8 +82,12 @@ export default function HomePage() {
 
                 {/* Blog Content */}
                 <div className="p-6">
-                  <h2 className="text-3xl font-semibold text-gray-900 mb-3">{blog.title}</h2>
-                  <p className="text-gray-600 mb-6 line-clamp-3">{blog.content}</p>
+                  <h2 className="text-3xl font-semibold text-gray-900 mb-3">
+                    {blog.title}
+                  </h2>
+                  <p className="text-gray-600 mb-6 line-clamp-3">
+                    {blog.content}
+                  </p>
 
                   {/* Author Section */}
                   <div className="flex items-center justify-between">
@@ -89,8 +100,12 @@ export default function HomePage() {
                         className="w-12 h-12 rounded-full border-2 border-indigo-500 transition-all duration-300 group-hover:border-indigo-700"
                       />
                       <div>
-                        <p className="text-sm font-medium text-gray-900">{blog.authorName}</p>
-                        <p className="text-xs text-gray-500">{new Date(blog.createdAt).toLocaleDateString()}</p>
+                        <p className="text-sm font-medium text-gray-900">
+                          {blog.authorName}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {new Date(blog.createdAt).toLocaleDateString()}
+                        </p>
                       </div>
                     </div>
                     <Link href={`/blog/${blog._id}`} passHref>
@@ -106,5 +121,5 @@ export default function HomePage() {
         )}
       </main>
     </div>
-  )
+  );
 }
