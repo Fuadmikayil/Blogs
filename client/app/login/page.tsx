@@ -12,43 +12,43 @@ export default function LoginPage() {
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setLoading(true)
+  e.preventDefault()
+  setError(null)
+  setLoading(true)
 
-    // Yoxlama: username və password boş olmasın
-    if (!username || !password) {
-      setError('Please fill in both fields')
-      setLoading(false)
-      return
-    }
-
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_IP}/users/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include', // Cookie-ləri göndəririk
-        body: JSON.stringify({ username, password }),
-      })
-
-      // Response yoxlanması
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || 'Login failed')
-      }
-
-      const data = await response.json()
-      
-      // Redirect to user panel
-      router.push('/userPanel')
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred')
-    } finally {
-      setLoading(false)
-    }
+  // Yoxlama: username və password boş olmasın
+  if (!username || !password) {
+    setError('Please fill in both fields')
+    setLoading(false)
+    return
   }
+
+  try {
+    const response = await fetch('/api/users/login', {  // <-- proxy URL
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', // Cookie-ləri göndəririk
+      body: JSON.stringify({ username, password }),
+    })
+
+    // Response yoxlanması
+    if (!response.ok) {
+      const data = await response.json()
+      throw new Error(data.message || 'Login failed')
+    }
+
+    const data = await response.json()
+    
+    // Redirect to user panel
+    router.push('/userPanel')
+  } catch (err) {
+    setError(err instanceof Error ? err.message : 'An error occurred')
+  } finally {
+    setLoading(false)
+  }
+}
 
   return (
     <div className="min-h-screen bg-white">

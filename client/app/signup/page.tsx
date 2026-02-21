@@ -20,7 +20,7 @@ export default function SignupPage() {
     setLoading(true)
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_IP}/users/register`, {
+      const response = await fetch(`api/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
