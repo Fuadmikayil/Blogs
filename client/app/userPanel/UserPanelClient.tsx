@@ -20,7 +20,7 @@ export default function UserPanelClient() {
     setLoading(true)
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_IP}/blogs/addBlog`, {
+      const response = await fetch(`api/blogs/addBlog`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
